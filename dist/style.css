@@ -13,12 +13,20 @@ html, body {
 
 }
 
-.wordbox h1 {
-    font-family: Georgia, sans-serif;
-    font-size: 10em;
-    letter-spacing: -2px;
+#wordbox {
+    padding-bottom: 30px;
+    padding: 0 10px 60px;
+    max-width: 100vw;
 }
 
-.wordbox h2 {
+#wordbox h1 {
+    font-family: Georgia, sans-serif;
+    font-size: 2.5em;
+    letter-spacing: -2px;
+    text-align: center;
+
+}
+
+#wordbox h2 {
     text-align: center;
 }

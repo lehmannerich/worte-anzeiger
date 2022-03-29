@@ -1,10 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import {
-  getFirestore, collection, onSnapshot,
-  addDoc, deleteDoc, doc,
-  query, where,
-  orderBy, serverTimestamp,
-  updateDoc
+  getFirestore, collection, onSnapshot
 } from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -38,10 +34,8 @@ onSnapshot(colRef, (snapshot) => {
 
 document.addEventListener("click", () => {
   console.log("clicked")
-  let current = h1
   getNext();
   document.getElementById("h1").innerHTML = h1;
-  document.getElementById("lead").innerHTML = i;
 });
 
 function getNext() {
