@@ -2,13 +2,11 @@ html, body {
     background-color: rgb(235, 236, 245);
     height: 100vh;
     overflow: hidden;
+    color: rgb(19, 22, 31);
 
 }
 
 #wordbox {
-    padding-bottom: 30px;
-    padding: 0 10px 60px;
-
     height: 100%;
 
     /* gentle centering */
@@ -24,7 +22,7 @@ html, body {
     font-size: 2.5em;
     letter-spacing: -2px;
     text-align: center;
-
+    padding-bottom: 80px;
 }
 
 #wordbox h2 {
@@ -35,6 +33,8 @@ html, body {
     position: fixed;
     top: 0px;
     width: 100%;
+
+    font-family: Tahoma, sans-serif;
 }
 
 /* 
@@ -57,7 +57,7 @@ html, body {
     display: -ms-flexbox;
     display: flex;
     list-style: none;
-    margin: 0;
+    margin: 8px 0;
     padding: 0;
   }
   
@@ -76,17 +76,19 @@ html, body {
     max-width: 150px;
     margin: 0 4px;
     
-    /* additional styles */
-    border: 1px solid lightgray;
-    border-radius: 3px;
-    background: white;
-    -o-text-overflow: ellipsis;
-       text-overflow: ellipsis;
-  }
-  
-  .menu-item {
     text-align: center;
     display: inline-block;
     width: 100%;
     padding: 11px 0;
+
+    color: rgba(19, 22, 31, 0.5);
+
+    /* additional styles */
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
+
+  }
+
+  .active {
+    color: rgb(19, 22, 31);
   }
