@@ -32,7 +32,8 @@ onSnapshot(colRef, (snapshot) => {
   })
 });
 
-document.addEventListener("click", () => {
+document.getElementById("wordbox")
+.addEventListener("click",() => {
   console.log("clicked")
   getNext();
   document.getElementById("h1").innerHTML = h1;
