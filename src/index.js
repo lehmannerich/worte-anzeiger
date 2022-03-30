@@ -25,6 +25,7 @@ const colRef = collection(db, 'words')
 let words = [];
 let activeArray = [];
 let tags = [];
+let activeTag = "Alle";
 let h1 = null;
 let i = 0;
 
@@ -49,10 +50,11 @@ onSnapshot(colRef, (snapshot) => {
   // 2 Tag Clicker
   tags.forEach((tag) => {
 
-    // change activeArray with click
+    // change activeArray + activeTag with click
     document.getElementById(tag)
     .addEventListener("click", () => {
       console.log(tag + " clicked")
+      activeTag = tag;
       activeArray = words;
       activeArray = activeArray.filter( x => x.tag == tag );
       getNext();
@@ -72,10 +74,25 @@ onSnapshot(colRef, (snapshot) => {
   console.log(tags)
 });
 
+// change activeArray + activeTag with click
+function activateTag(x) {
+  activeTag = x;
+  activeArray = words;
+  activeArray = activeArray.filter( e => e.tag == x );
+  getNext();
+
+  tags.forEach((tag) => {
+    if (tag == x) {
+      document.getElementById(tag).classList.add("active")
+    }
+    else {
+      document.getElementById(tag).classList.remove("active");
+    }
+  })
+}
 
 
-
-// Next Click
+// Click for Next Word
 document.getElementById("wordbox")
   .addEventListener("click", () => {
     console.log("clicked")
@@ -98,5 +115,32 @@ function getNext() {
     document.getElementById("h1").innerHTML = h1;
   }
 }
+
+// Swipe left right for next previous tag
+let touchstartX = 0
+let touchendX = 0
+
+const slider = document.getElementById('wordbox')
+
+function handleGesture() {
+  if (touchendX < touchstartX) 
+  { 
+    console.log("Swiped left")
+    activateTag("🦁 Tiere")
+  }
+  if (touchendX > touchstartX) 
+  {
+    console.log('swiped right!')
+  } 
+}
+
+wordbox.addEventListener('touchstart', e => {
+  touchstartX = e.changedTouches[0].screenX
+})
+
+wordbox.addEventListener('touchend', e => {
+  touchendX = e.changedTouches[0].screenX
+  handleGesture()
+})
 
 
