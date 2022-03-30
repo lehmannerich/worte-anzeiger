@@ -115,6 +115,8 @@ function getNext() {
   }
 }
 
+// SLIDER
+
 // Swipe left right for next previous tag
 
 // let touchstartX = 0
