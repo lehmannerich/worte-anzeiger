@@ -116,56 +116,57 @@ function getNext() {
 }
 
 // Swipe left right for next previous tag
-let touchstartX = 0
-let touchendX = 0
 
-const slider = document.getElementById('wordbox')
+// let touchstartX = 0
+// let touchendX = 0
 
-function handleGesture() {
-  if (touchendX < touchstartX) 
-  { 
-    activateTag(getPrevTag(activeTag))
+// const slider = document.getElementById('wordbox')
 
-  }
-  if (touchendX > touchstartX) 
-  {
-    activateTag(getNextTag(activeTag))
-  }
-  console.log('New active tag is ' + activeTag)
-}
+// function handleGesture() {
+//   if (touchendX < touchstartX) 
+//   { 
+//     activateTag(getPrevTag(activeTag))
 
-wordbox.addEventListener('touchstart', e => {
-  touchstartX = e.changedTouches[0].screenX
-})
+//   }
+//   if (touchendX > touchstartX) 
+//   {
+//     activateTag(getNextTag(activeTag))
+//   }
+//   console.log('New active tag is ' + activeTag)
+// }
 
-wordbox.addEventListener('touchend', e => {
-  touchendX = e.changedTouches[0].screenX
-  handleGesture()
-})
+// wordbox.addEventListener('touchstart', e => {
+//   touchstartX = e.changedTouches[0].screenX
+// })
 
-// Helpers
-function getNextTag(currentTag) {
-  let i = tags.indexOf(currentTag)
-  i++
-  if (tags[i]) {
-    return tags[i]
-  }
-  else {
-    return tags[0]
-  }
-}
+// wordbox.addEventListener('touchend', e => {
+//   touchendX = e.changedTouches[0].screenX
+//   handleGesture()
+// })
 
-function getPrevTag(currentTag) {
-  if (activeTag == "Start") {
-    return tags[0]
-  }
-  let i = tags.indexOf(currentTag)
-  if (i == 0) {
-    let last = tags.length - 1
-    return tags[last]
-  }
-  else {
-    i--
-    return tags[i]
-  }
-}
+// // Helpers
+// function getNextTag(currentTag) {
+//   let i = tags.indexOf(currentTag)
+//   i++
+//   if (tags[i]) {
+//     return tags[i]
+//   }
+//   else {
+//     return tags[0]
+//   }
+// }
+
+// function getPrevTag(currentTag) {
+//   if (activeTag == "Start") {
+//     return tags[0]
+//   }
+//   let i = tags.indexOf(currentTag)
+//   if (i == 0) {
+//     let last = tags.length - 1
+//     return tags[last]
+//   }
+//   else {
+//     i--
+//     return tags[i]
+//   }
+// }
