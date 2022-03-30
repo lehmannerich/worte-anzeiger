@@ -25,7 +25,7 @@ const colRef = collection(db, 'words')
 let words = [];
 let activeArray = [];
 let tags = [];
-let activeTag = "Alle";
+let activeTag = "Start";
 let h1 = null;
 let i = 0;
 
@@ -91,7 +91,6 @@ function activateTag(x) {
   })
 }
 
-
 // Click for Next Word
 document.getElementById("wordbox")
   .addEventListener("click", () => {
@@ -125,13 +124,14 @@ const slider = document.getElementById('wordbox')
 function handleGesture() {
   if (touchendX < touchstartX) 
   { 
-    console.log("Swiped left")
-    activateTag("🦁 Tiere")
+    activateTag(getPrevTag(activeTag))
+
   }
   if (touchendX > touchstartX) 
   {
-    console.log('swiped right!')
-  } 
+    activateTag(getNextTag(activeTag))
+  }
+  console.log('New active tag is ' + activeTag)
 }
 
 wordbox.addEventListener('touchstart', e => {
@@ -143,4 +143,29 @@ wordbox.addEventListener('touchend', e => {
   handleGesture()
 })
 
+// Helpers
+function getNextTag(currentTag) {
+  let i = tags.indexOf(currentTag)
+  i++
+  if (tags[i]) {
+    return tags[i]
+  }
+  else {
+    return tags[0]
+  }
+}
 
+function getPrevTag(currentTag) {
+  if (activeTag == "Start") {
+    return tags[0]
+  }
+  let i = tags.indexOf(currentTag)
+  if (i == 0) {
+    let last = tags.length - 1
+    return tags[last]
+  }
+  else {
+    i--
+    return tags[i]
+  }
+}
