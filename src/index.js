@@ -23,6 +23,8 @@ const colRef = collection(db, 'words')
 
 // realtime collection data
 let words = [];
+let activeArray = [];
+let tags = [];
 let h1 = null;
 let i = 0;
 
@@ -30,17 +32,71 @@ onSnapshot(colRef, (snapshot) => {
   snapshot.docs.forEach((doc) => {
     words.push(doc.data())
   })
+  
+  // 0 Initialize Active Array
+  activeArray = words
+
+  // 1 Get Tags
+  tags = [...new Set(words.map(item => item.tag))];
+  let str = '<ul class="menu">';
+  tags.forEach((tag) => {
+    str += '<li class="menu-item" id="' + tag + '">' + tag + '</li>';
+  });
+  str += '</ul>';
+  document.getElementById("filterbox").innerHTML = str;
+
+
+  // 2 Tag Clicker
+  tags.forEach((tag) => {
+
+    // change activeArray with click
+    document.getElementById(tag)
+    .addEventListener("click", () => {
+      console.log(tag + " clicked")
+      activeArray = words;
+      activeArray = activeArray.filter( x => x.tag == tag );
+      getNext();
+
+      // remove all active
+      tags.forEach((tag)=>{
+        document.getElementById(tag).classList.remove("active");
+      })
+      // make one active
+      document.getElementById(tag).classList.add("active");
+    });
+  })
+
+  // Logs
+  console.log(words)
+  console.log(activeArray)
+  console.log(tags)
 });
 
+
+
+
+// Next Click
 document.getElementById("wordbox")
-.addEventListener("click",() => {
-  console.log("clicked")
-  getNext();
-  document.getElementById("h1").innerHTML = h1;
-});
+  .addEventListener("click", () => {
+    console.log("clicked")
+    getNext();
+  });
 
 function getNext() {
-  let random = Math.floor(Math.random() * words.length);
-  h1 = words[random].word;
-  i++;
+  let random = Math.floor(Math.random() * activeArray.length);
+  if (activeArray.length == 1) {
+    h1 = activeArray[0].word;
+    i++;
+    document.getElementById("h1").innerHTML = h1;
+  }
+  else if (h1 == activeArray[random].word){
+    getNext()
+  }
+  else {
+    h1 = activeArray[random].word;
+    i++;
+    document.getElementById("h1").innerHTML = h1;
+  }
 }
+
+
